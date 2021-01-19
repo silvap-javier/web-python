@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p></p>
+    <H1>Description</H1>
+    <hr/>
+    <h2>{% block title %} Given the parameters file: Update all the images names, generate the
+      inspection_data.json files, updates distance to root and distance to blade
+      values, creates the inspection report, creates the report summary. {% endblock %}</h2>
+    <hr/>
+    <form action="{{ url_for('run_script') }}" method="post">
+        <div id="tree"></div>
+        <input type="hidden" id="pathFile" name="pathFile">
+        <input type="hidden" name="type" value="automatic-report-generation" />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <script>
+      document.addEventListener('DOMContentLoaded', loadTree, false);
+      function loadTree(){
+        $("#tree").fancytree({
+          source: {
+            url: "/tree",
+            cache: false
+          },
+          activate: function(event, data){
+            var node = data.node;
+            document.getElementById('pathFile').value = data.node.data.path;
+          },
+          beforeSelect: function(event, data){
+            if( data.node.isFolder() ){
+              return false;
+            }
+          }
+        });
+      }
+      
+    </script>
+{% endblock %}

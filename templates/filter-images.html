@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p></p>
+    <H1>Description</H1>
+    <hr/>
+    <h2>{% block title %} Filter the images to reduce darkness. {% endblock %}</h2>
+    <hr/>
+    <form action="{{ url_for('run_script') }}" method="post">
+      <input type="hidden" name="type" value="filter-images" />
+      <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+{% endblock %}

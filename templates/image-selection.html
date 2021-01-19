@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p></p>
+    <H1>Description</H1>
+    <hr/>
+    <h2>{% block title %} Select images based on gps information of the images. {% endblock %}</h2>
+    <hr/>
+    <form action="{{ url_for('run_script') }}" method="post">
+        <input type="hidden" name="type" value="image-selection" />
+        <div class="form-group">
+          <label for="exampleInputEmail1">Nacelle z-offset</label>
+          <input type="text" class="form-control" name="nacelle_z_offset" value="0.0">
+          <small class="form-text text-muted"> Offset distance in meters at z direction,
+            above the nacelle. default: 0.0</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Min Dist</label>
+          <input type="text" class="form-control" name="min_dist" value="2">
+          <small class="form-text text-muted"> Minimum distance (in meters) to select the
+            following image. Default = 2</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+{% endblock %}

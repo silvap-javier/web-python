@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p></p>
+    <H1>Description</H1>
+    <hr/>
+    <h2>{% block title %} Creation of a csv with the image structure. {% endblock %}</h2>
+    <hr/>
+    <form action="{{ url_for('run_script') }}" method="post">
+        <input type="hidden" name="type" value="create-image-structure" />
+        <div class="form-group">
+            <label for="exampleInputEmail1">Output name</label>
+            <input type="text" class="form-control" name="output_name">
+            <small class="form-text text-muted">The name of the output file. By default:
+              WTXX_image_structure.csv</small>
+          </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p></p>
+    <H1>Description</H1>
+    <hr/>
+    <h2>{% block title %} Creation of a summary from the json data. {% endblock %}</h2>
+    <hr/>
+    <form action="{{ url_for('run_script') }}" method="post">
+        <input type="hidden" name="type" value="summary-creation" />
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Overall Summary</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="overall_summary" id="overall-summary1" value="false" checked>
+            <label class="form-check-label" for="overall-summary1">
+              False
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="overall_summary" id="overall-summary2" value="true">
+            <label class="form-check-label" for="overall-summary2">
+              True
+            </label>
+          </div>
+          <small class="form-text text-muted">If the summary is overall or not.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+{% endblock %}

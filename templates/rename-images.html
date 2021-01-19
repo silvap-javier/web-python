@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p></p>
+    <H1>Description</H1>
+    <hr/>
+    <h2>{% block title %} Rename the images to keep the track of the structure. {% endblock %}</h2>
+    <hr/>
+    <form action="{{ url_for('run_script') }}" method="post">
+        <input type="hidden" name="type" value="rename-images" />
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">All Wtgs</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="all_wtgs" id="all-wtgs1" value="false" checked>
+            <label class="form-check-label" for="all-wtgs1">
+              False
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="all_wtgs" id="all-wtgs2" value="true">
+            <label class="form-check-label" for="all-wtgs2">
+              True
+            </label>
+          </div>
+          <small class="form-text text-muted">If true, rename all the images found inside the wtg
+            directories ended by numbers (For example: WT01,
+            TI12, etc.).</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+{% endblock %}

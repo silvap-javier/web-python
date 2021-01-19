@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p></p>
+    <H1>Description</H1>
+    <hr/>
+    <h2>{% block title %} Calculate and insert the distance to root metadata on the selected wind-
+      turbine images, based on GPS info at Exif. 'NACELLE_IMG_PATH' is a path to
+      a reference image close to the nacelle. {% endblock %}</h2>
+    <hr/>
+    <form action="{{ url_for('run_script') }}" method="post">
+      <input type="hidden" name="type" value="nacelle-offset" />
+        <div class="form-group">
+            <label for="exampleInputEmail1">Nacelle Offset</label>
+            <input type="text" class="form-control" name="nacelle_offset" value="0.0">
+            <small class="form-text text-muted">Offset distance in meters from the nacelle.
+              default: 0.0</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Fit Type</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="fit_type">
+              <option value="line">line</option>
+              <option value="plane">plane</option>
+            </select>
+            <small class="form-text text-muted">Fit a straight line for each stage or a plane to
+              the entire set. default: line</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Show Plot</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="show_plot" id="show-plot1" value="false" checked>
+              <label class="form-check-label" for="show-plot1">
+                False
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="show_plot" id="show-plot2" value="true">
+              <label class="form-check-label" for="show-plot2">
+                True
+              </label>
+            </div>
+            <small class="form-text text-muted">Display fitted plane/line over image positions?
+              default: False</small>
+          </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+{% endblock %}

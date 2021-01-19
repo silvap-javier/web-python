@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.37.0/skin-awesome/ui.fancytree.min.css" integrity="sha512-sFxlk3UZ+ZiWPfHm/CfClk1ejJGQSUyB/FKa5dna7SOzOiA9yk75c0Ni6BVlePHWDf0n1qmpkPLka+HxjkJgnA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.37.0/skin-bootstrap-n/ui.fancytree.min.css" integrity="sha512-iw1Mgp9BZor3a+VB8Yb8UI58j5X5tWqoaW2G6UThyHOrynf+dQvFAW7p0dW4hnCYrGHNeQxFY2mBEuvQ0/eEsQ==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.37.0/skin-bootstrap/ui.fancytree.min.css" integrity="sha512-ZNPDR7ghmCig7eBuBHYMFeJix4+wxZ37Ky5RmhU/CbpzATUO2sLhB5HJaRCWirl7YHJDQvmE3rbf4FOQOttygg==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.37.0/skin-vista/ui.fancytree.min.css" integrity="sha512-YUi/Sefcq3HGQJI4A219q8Vb8P6z9f2k2eeWny8U9+31QGAsqYz/u4hi6193oqx4Kr5IMK3OXA/79zH9oRHzrA==" crossorigin="anonymous" />
+    <title>{% block title %} {% endblock %}</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="{{ url_for('index')}}">Alerion</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="/automatic-report-generation">Automatic Report Generation</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/create-img-structure">Create img Structure</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/distance-to-root">Distance to Root</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/filter-images">Filter Images</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/generate-report">Generate Report</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/image-selection">Image Selection</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/inspection-data-generator">Inspection Data Generator</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/rename-images">Rename Images</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/summary-creation">Summary Creation</a>
+              </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        {% block content %} {% endblock %}
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='js/index.js')}}"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.37.0/jquery.fancytree-all.min.js" integrity="sha512-L0nHqRKBdw/O4sMhJ6ccVwaDHGV6fAOa8mIa2qFQXCUbeRCMRG5ZXXyXNL3bOuItxmC3TJq8mdnzqOQljndnXQ==" crossorigin="anonymous"></script>
+  </body>
+</html>
