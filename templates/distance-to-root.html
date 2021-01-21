@@ -9,7 +9,12 @@
       a reference image close to the nacelle. {% endblock %}</h2>
     <hr/>
     <form action="{{ url_for('run_script') }}" method="post">
-      <input type="hidden" name="type" value="nacelle-offset" />
+        <div class="form-group">
+          <label for="exampleInputEmail1">NACELLE_IMG_PATH</label>
+          <div id="tree"></div>
+        </div>
+        <input type="hidden" id="pathFile" name="NACELLE_IMG_PATH">
+        <input type="hidden" name="type" value="nacelle-offset" />
         <div class="form-group">
             <label for="exampleInputEmail1">Nacelle Offset</label>
             <input type="text" class="form-control" name="nacelle_offset" value="0.0">
@@ -44,4 +49,25 @@
           </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+      <script>
+        document.addEventListener('DOMContentLoaded', loadTree, false);
+        function loadTree(){
+          $("#tree").fancytree({
+            source: {
+              url: "/tree",
+              cache: false
+            },
+            activate: function(event, data){
+              var node = data.node;
+              document.getElementById('pathFile').value = data.node.data.path;
+            },
+            beforeSelect: function(event, data){
+              if( data.node.isFolder() ){
+                return false;
+              }
+            }
+          });
+        }
+        
+      </script>
 {% endblock %}

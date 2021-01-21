@@ -7,7 +7,32 @@
     <h2>{% block title %} Filter the images to reduce darkness. {% endblock %}</h2>
     <hr/>
     <form action="{{ url_for('run_script') }}" method="post">
+      <div class="form-group">
+        <label for="exampleInputEmail1">ROOT_PATH</label>
+        <div id="tree"></div>
+      </div>
+      <input type="hidden" id="pathFile" name="ROOT_PATH">
       <input type="hidden" name="type" value="filter-images" />
       <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+      <script>
+        document.addEventListener('DOMContentLoaded', loadTree, false);
+        function loadTree(){
+          $("#tree").fancytree({
+            source: {
+              url: "/tree",
+              cache: false
+            },
+            activate: function(event, data){
+              var node = data.node;
+              document.getElementById('pathFile').value = data.node.data.path;
+            },
+            beforeSelect: function(event, data){
+              if( data.node.isFolder() ){
+                return false;
+              }
+            }
+          });
+        }
+      </script>
 {% endblock %}

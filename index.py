@@ -65,38 +65,67 @@ def run_script():
         'filter-images' : __filter_images,
         'image-selection' : __image_selection,
         'rename-images' : __rename_images,
-        'summary-creation': __summary_creation
+        'summary-creation': __summary_creation,
+        'inspection-data-generator': __inspection_data_generator,
+        'generate-report' : __generate_report
     }
     actionType = request.form['type']
     actions[actionType](request)
     return render_template('result.html')
 
 def __automati_report_gen(request): 
-        print('file',request.form['pathFile'])
+        print('PARAMETERS_FILE',request.form['PARAMETERS_FILE'])
+        print("Private method") 
+
+def __inspection_data_generator(request): 
+        print('WTG_PATH',request.form['WTG_PATH'])
+        print('CONFIG_PATH',request.form['CONFIG_PATH'])
+        print('drone_type',request.form['drone_type'])
+        print('manual_flight',request.form['manual_flight'])
+        print("Private method") 
+
+def __generate_report(request): 
+        print('INSPECTION_PATH',request.form['INSPECTION_PATH'])
+        print('DAMAGE_ANALYSIS_DATASET_PATH',request.form['DAMAGE_ANALYSIS_DATASET_PATH'])
+        print('config_path',request.form['config_path'])
+        print('xlsx_template_path',request.form['xlsx_template_path'])
+        print('bulk_generation',request.form['bulk_generation'])
+        print('dataset_names',request.form['dataset_names'])
         print("Private method") 
 
 def __summary_creation(request): 
+        print('PARAMETERS_FILE',request.form['INSPECTION_REPORT_JSON'])
+        print('PARAMETERS_FILE',request.form['CONFIGURATION_FILE_PATH'])
+        print('PARAMETERS_FILE',request.form['XLSX_TEMPLATE_PATH'])
+        print('overall_summary',request.form['overall_summary'])
+        print('format',request.form['format'])
         print("Private method") 
 
 def __create_image_structure(request): 
         print('output_name',request.form['output_name'])
+        print('ROOT_PATH',request.form['ROOT_PATH'])
         print("Private method") 
 
 def __nacelle_offset(request): 
+        print('NACELLE_IMG_PATH',request.form['NACELLE_IMG_PATH'])
         print('nacelle_offset',request.form['nacelle_offset'])
         print('fit_type',request.form['fit_type'])
         print('show_plot',request.form['show_plot'])
         print("Private method") 
 
 def __image_selection(request): 
+        print('WTG_PATH',request.form['WTG_PATH'])
         print('nacelle_offset',request.form['nacelle_z_offset'])
         print('fit_type',request.form['min_dist'])
         print("Private method") 
 
 def __filter_images(request): 
+        print('ROOT_PATH',request.form['ROOT_PATH'])
         print("Private method") 
 
 def __rename_images(request): 
+        print('WTG_PATH',request.form['WTG_PATH'])
+        print('all_wtgs',request.form['all_wtgs'])
         print("Private method") 
 
 def scan_dir(dir, path_dict):

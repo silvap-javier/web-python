@@ -7,13 +7,38 @@
     <h2>{% block title %} Creation of a csv with the image structure. {% endblock %}</h2>
     <hr/>
     <form action="{{ url_for('run_script') }}" method="post">
+        <div class="form-group">
+          <label for="exampleInputEmail1">ROOT_PATH</label>
+          <div id="tree"></div>
+        </div>
+        <input type="hidden" id="pathFile" name="ROOT_PATH">
         <input type="hidden" name="type" value="create-image-structure" />
         <div class="form-group">
             <label for="exampleInputEmail1">Output name</label>
             <input type="text" class="form-control" name="output_name">
             <small class="form-text text-muted">The name of the output file. By default:
               WTXX_image_structure.csv</small>
-          </div>
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+      <script>
+        document.addEventListener('DOMContentLoaded', loadTree, false);
+        function loadTree(){
+          $("#tree").fancytree({
+            source: {
+              url: "/tree",
+              cache: false
+            },
+            activate: function(event, data){
+              var node = data.node;
+              document.getElementById('pathFile').value = data.node.data.path;
+            },
+            beforeSelect: function(event, data){
+              if( data.node.isFolder() ){
+                return false;
+              }
+            }
+          });
+        }
+      </script>
 {% endblock %}

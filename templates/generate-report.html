@@ -4,40 +4,125 @@
     <p></p>
     <H1>Description</H1>
     <hr/>
-    <h2>{% block title %} Generate inspection Excel report {% endblock %}</h2>
+    <h2>{% block title %} Generate the inspection_data.json files from the images metadata using the
+      configuration defined in config_path. {% endblock %}</h2>
     <hr/>
     <form action="{{ url_for('run_script') }}" method="post">
         <div class="form-group">
-          <label for="exampleInputEmail1">inspection_path (path)</label>
-          <input type="file" id="filepicker" name="inspection" name="fileList" webkitdirectory multiple />
-          <ul id="listing"></ul>
-          <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+          <label for="exampleInputEmail1">INSPECTION_PATH</label>
+          <div id="tree"></div>
         </div>
         <div class="form-group">
-            <label for="exampleInputEmail1">damage_analysis_dataset_path (path)</label>
-            <input type="text" class="form-control" name="damage">
-            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+          <label for="exampleInputEmail1">DAMAGE_ANALYSIS_DATASET_PATH</label>
+          <div id="tree2"></div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">CONFIG_PATH</label>
+          <div id="tree3"></div>
+          <small class="form-text text-muted">Config file path. default: data/config.yaml</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">XLSX_TEMPLATE_PATH</label>
+          <div id="tree4"></div>
+          <small class="form-text text-muted">Excel template path, default: data/templates/
+            alerion_inspection_report_template.xlsx</small>
+        </div>
+
+        <input type="hidden" id="pathFile" name="INSPECTION_PATH">
+        <input type="hidden" id="pathFile2" name="DAMAGE_ANALYSIS_DATASET_PATH">
+        <input type="hidden" id="pathFile3" name="config_path">
+        <input type="hidden" id="pathFile4" name="xlsx_template_path">
+
+        <input type="hidden" name="type" value="generate-report" />
+          <div class="form-group">
+              <label for="exampleInputEmail1">Dataset Names</label>
+              <input type="text" class="form-control" name="dataset_names">
+              <small class="form-text text-muted">Data set names (default: #all#)</small>
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail1">config-path (path)</label>
-            <input type="text" class="form-control"  name="config">
-            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">dataset-names (string)</label>
-            <input type="text" class="form-control" name="dataset">
-            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">xlsx-template-path (path)</label>
-            <input type="text" class="form-control"  name="xlsx">
-            <small  class="form-text text-muted">We'll never share your email with anyone else.</small>
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">bulk-generation (bool)</label>
-            <input type="text" class="form-control" name="bulk">
-            <small  class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <label for="exampleFormControlSelect1">Bulk Generation</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="bulk_generation" id="bulk-generation1" value="false" >
+              <label class="form-check-label" for="bulk-generation1">
+                False
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="bulk_generation" id="bulk-generation2" value="true" checked>
+              <label class="form-check-label" for="bulk-generation2">
+                True
+              </label>
+            </div>
+            <small class="form-text text-muted">If true, will find all the wtgs inside the
+              inspection_path folder and create the
+              reports.</small>
           </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+      <script>
+        document.addEventListener('DOMContentLoaded', loadTree, false);
+        function loadTree(){
+          $("#tree").fancytree({
+            source: {
+              url: "/tree",
+              cache: false
+            },
+            activate: function(event, data){
+              var node = data.node;
+              document.getElementById('pathFile').value = data.node.data.path;
+            },
+            beforeSelect: function(event, data){
+              if( data.node.isFolder() ){
+                return false;
+              }
+            }
+          });
+          $("#tree2").fancytree({
+            source: {
+              url: "/tree",
+              cache: false
+            },
+            activate: function(event, data){
+              var node = data.node;
+              document.getElementById('pathFile2').value = data.node.data.path;
+            },
+            beforeSelect: function(event, data){
+              if( data.node.isFolder() ){
+                return false;
+              }
+            }
+          });
+          $("#tree3").fancytree({
+            source: {
+              url: "/tree",
+              cache: false
+            },
+            activate: function(event, data){
+              var node = data.node;
+              document.getElementById('pathFile3').value = data.node.data.path;
+            },
+            beforeSelect: function(event, data){
+              if( data.node.isFolder() ){
+                return false;
+              }
+            }
+          });
+          $("#tree4").fancytree({
+            source: {
+              url: "/tree",
+              cache: false
+            },
+            activate: function(event, data){
+              var node = data.node;
+              document.getElementById('pathFile4').value = data.node.data.path;
+            },
+            beforeSelect: function(event, data){
+              if( data.node.isFolder() ){
+                return false;
+              }
+            }
+          });
+        }
+        
+      </script>
 {% endblock %}

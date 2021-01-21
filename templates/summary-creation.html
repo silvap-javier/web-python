@@ -7,6 +7,22 @@
     <h2>{% block title %} Creation of a summary from the json data. {% endblock %}</h2>
     <hr/>
     <form action="{{ url_for('run_script') }}" method="post">
+        <div class="form-group">
+          <label for="exampleInputEmail1">INSPECTION_REPORT_JSON</label>
+          <div id="tree"></div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">CONFIGURATION_FILE_PATH</label>
+          <div id="tree2"></div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">XLSX_TEMPLATE_PATH</label>
+          <div id="tree3"></div>
+        </div>
+        <input type="hidden" id="pathFile" name="INSPECTION_REPORT_JSON">
+        <input type="hidden" id="pathFile2" name="CONFIGURATION_FILE_PATH">
+        <input type="hidden" id="pathFile3" name="XLSX_TEMPLATE_PATH">
+
         <input type="hidden" name="type" value="summary-creation" />
         <div class="form-group">
           <label for="exampleFormControlSelect1">Overall Summary</label>
@@ -24,6 +40,66 @@
           </div>
           <small class="form-text text-muted">If the summary is overall or not.</small>
         </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Format</label>
+          <select class="form-control" id="exampleFormControlSelect1" name="format">
+            <option value="naturgy">naturgy</option>
+            <option value="nordex">nordex</option>
+            <option value="dnv">dnv</option>
+            <option value="alerion">alerion</option>
+          </select>
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', loadTree, false);
+        function loadTree(){
+          $("#tree").fancytree({
+            source: {
+              url: "/tree",
+              cache: false
+            },
+            activate: function(event, data){
+              var node = data.node;
+              document.getElementById('pathFile').value = data.node.data.path;
+            },
+            beforeSelect: function(event, data){
+              if( data.node.isFolder() ){
+                return false;
+              }
+            }
+          });
+          $("#tree2").fancytree({
+            source: {
+              url: "/tree",
+              cache: false
+            },
+            activate: function(event, data){
+              var node = data.node;
+              document.getElementById('pathFile2').value = data.node.data.path;
+            },
+            beforeSelect: function(event, data){
+              if( data.node.isFolder() ){
+                return false;
+              }
+            }
+          });
+          $("#tree3").fancytree({
+            source: {
+              url: "/tree",
+              cache: false
+            },
+            activate: function(event, data){
+              var node = data.node;
+              document.getElementById('pathFile3').value = data.node.data.path;
+            },
+            beforeSelect: function(event, data){
+              if( data.node.isFolder() ){
+                return false;
+              }
+            }
+          });
+        }
+      </script>
 {% endblock %}

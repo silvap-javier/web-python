@@ -7,6 +7,11 @@
     <h2>{% block title %} Select images based on gps information of the images. {% endblock %}</h2>
     <hr/>
     <form action="{{ url_for('run_script') }}" method="post">
+        <div class="form-group">
+          <label for="exampleInputEmail1">WTG_PATH</label>
+          <div id="tree"></div>
+        </div>
+        <input type="hidden" id="pathFile" name="WTG_PATH">
         <input type="hidden" name="type" value="image-selection" />
         <div class="form-group">
           <label for="exampleInputEmail1">Nacelle z-offset</label>
@@ -22,4 +27,24 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+      <script>
+        document.addEventListener('DOMContentLoaded', loadTree, false);
+        function loadTree(){
+          $("#tree").fancytree({
+            source: {
+              url: "/tree",
+              cache: false
+            },
+            activate: function(event, data){
+              var node = data.node;
+              document.getElementById('pathFile').value = data.node.data.path;
+            },
+            beforeSelect: function(event, data){
+              if( data.node.isFolder() ){
+                return false;
+              }
+            }
+          });
+        }
+      </script>
 {% endblock %}

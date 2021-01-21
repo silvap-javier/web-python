@@ -9,8 +9,11 @@
       values, creates the inspection report, creates the report summary. {% endblock %}</h2>
     <hr/>
     <form action="{{ url_for('run_script') }}" method="post">
-        <div id="tree"></div>
-        <input type="hidden" id="pathFile" name="pathFile">
+        <div class="form-group">
+          <label for="exampleInputEmail1">PARAMETERS_FILE</label>
+          <div id="tree"></div>
+        </div>
+        <input type="hidden" id="pathFile" name="PARAMETERS_FILE">
         <input type="hidden" name="type" value="automatic-report-generation" />
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
